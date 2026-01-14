@@ -19,9 +19,23 @@ dropout = 0.1
 torch.manual_seed(1337)
 
 # load dataset
-df = pd.read_csv("ldr_discography_released.csv")  # adjust filename
-all_lyrics = "\n\n".join(df['song_lyrics'].astype(str))
-text = all_lyrics
+df = pd.read_csv("taylor_swift_lyrics.csv", encoding="latin-1")
+df = df.dropna(subset=["lyric"])
+
+all_lyrics = []
+
+for _, row in df.iterrows():
+    song_block = (
+        f"[ARTIST] {row['artist']}\n"
+        f"[ALBUM] {row['album']}\n"
+        f"[TITLE] {row['track_title']}\n"
+        f"{row['lyric']}\n"
+    )
+    all_lyrics.append(song_block)
+
+text = "\n\n".join(all_lyrics)
+
+
 
 # create character vocabulary
 chars = sorted(list(set(text)))
@@ -172,7 +186,6 @@ for iter in range(max_iters):
     loss.backward()
     optimizer.step()
 
-# save model
 torch.save({
     'model_state_dict': model.state_dict(),
     'vocab_size': vocab_size,
@@ -182,6 +195,6 @@ torch.save({
     'block_size': block_size,
     'itos': itos,
     'stoi': stoi
-}, "mini_ldr_gpt.pth")
+}, "mini_taylor_gpt.pth")
 
-print("Model saved to mini_ldr_gpt.pth")
+print("Model saved to mini_taylor_gpt.pth")
