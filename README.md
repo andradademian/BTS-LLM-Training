@@ -2,7 +2,7 @@
 
 ## Contents:
 - gpt.py - the model from https://github.com/karpathy/ng-video-lecture, with slight modifications to run on my device
-- the two datasets i worked with: ldr_discography_released.csv and taylor_swift_lyrics.csv
+- the two datasets i worked with: ldr_discography_released.csv (https://www.kaggle.com/datasets/madroscla/lana-del-rey-genius-discography-released) and taylor_swift_lyrics.csv (https://www.kaggle.com/datasets/PromptCloudHQ/taylor-swift-song-lyrics-from-all-the-albums?select=taylor_swift_lyrics.csv)
 - the two saved models for analysis and outputs: mini_ldr_gpt.pth and mini_taylor_gpt.pth (current one being the latter)
 - main.py main testing file, where the model is imported and the outputs are printed after each user imput
 - main.ipynb notebook similar to main.py, showing the model import and outputs
